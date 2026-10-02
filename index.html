@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CORE // Agent Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #08070b;
+            --surface-color: #121017;
+            --text-main: #ece8f5;
+            --text-muted: #79728c;
+            --accent-purple: #a855f7;
+            --border-color: #211c2e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            margin: 4rem 0;
+        }
+
+        .hero h1 { font-size: 2.8rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px; }
+        .hero p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 480px; margin-bottom: 2rem; }
+
+        .ai-panel {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .ai-status { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--accent-purple); }
+        .ai-dot { width: 8px; height: 8px; background: var(--accent-purple); border-radius: 50%; box-shadow: 0 0 10px var(--accent-purple); }
+
+        .ai-metrics { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+        .ai-metrics span { color: var(--text-main); font-weight: bold; }
+
+        .action-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-btn:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            width: 100%;
+        }
+
+        .watermark { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .watermark:hover { color: var(--text-main); }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--surface-color);
+            border: 1px solid var(--accent-purple);
+            color: var(--text-main);
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(150%);
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 100;
+        }
+        .toast.show { visibility: visible; opacity: 1; transform: translateY(0); }
+
+        @media(max-width: 900px) { main { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div>// AI_CORE_10</div>
+        <div>NEURAL_GATEWAY</div>
+    </header>
+    <main>
+        <div class="hero">
+            <h1>Панель управления ИИ</h1>
+            <p>Интерфейс взаимодействия с автономными агентами и языковыми моделями. Мониторинг токенов, задержки ответа и управление контекстом.</p>
+            <button class="action-btn" onclick="showToast('Очистка контекста агента выполнена')">Очистить кэш</button>
+        </div>
+        <div class="ai-panel">
+            <div class="ai-status">
+                <div class="ai-dot"></div>
+                <span>AGENT ONLINE // ACTIVE MODEL</span>
+            </div>
+            <div class="ai-metrics">
+                <div>TOKEN USAGE: <span>14,280 / 128k</span></div>
+                <div>LATENCY: <span>184ms</span></div>
+                <div>ACCURACY RATE: <span>99.4%</span></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>wA Studio // AI Core Lab</div>
+        <a href="https://w4attack.github.io/port/" target="_blank" class="watermark">w3bAttacking © 2026 // wA Studio</a>
+    </footer>
+    <div id="toast" class="toast">Уведомление</div>
+    <script>
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.textContent = text;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
